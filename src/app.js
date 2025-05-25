@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 import express from 'express';
 import mongoose from 'mongoose';
+mongoose.set('strictQuery', false);
 import cookieParser from 'cookie-parser';
 
 import usersRouter from './routes/users.router.js';
@@ -13,6 +14,8 @@ import mocksRouter from './routes/mocks.router.js';
 const app = express();
 const PORT = process.env.PORT||8080;
 const connection = mongoose.connect(process.env.MONGODB_URL)
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('Error connecting to MongoDB:', err));
 
 app.use(express.json());
 app.use(cookieParser());
