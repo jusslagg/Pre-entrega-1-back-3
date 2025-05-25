@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
 import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
@@ -10,7 +12,7 @@ import mocksRouter from './routes/mocks.router.js';
 
 const app = express();
 const PORT = process.env.PORT||8080;
-const connection = mongoose.connect(`URL DE MONGO`)
+const connection = mongoose.connect(process.env.MONGODB_URL)
 
 app.use(express.json());
 app.use(cookieParser());
